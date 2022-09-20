@@ -13,14 +13,6 @@ const reduceMovies = reduceProperties("theater_id",{
     is_showing: ["movies_theaters",null,"is_showing"],
 })
 
-async function singleTheaterList(movie_id){
-    return knex("theaters as t")
-    .join("movies_theaters as mt", "t.theater_id", "mt.theater_id")
-    .join("movies as m","m.movie_id","mt.movie_id")
-    .select("t.*","mt.is_showing","m.movie_id")
-    .where("m.movie_id", movie_id)
-}
-
 async function list(){
     return knex("theaters as t")
     .join("movies_theaters as mt", "t.theater_id", "mt.theater_id")
@@ -30,6 +22,5 @@ async function list(){
 }
 
 module.exports = {
-    singleTheaterList,
     list,
 }
